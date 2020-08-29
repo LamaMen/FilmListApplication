@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Film List Application</string>
+    <string name="dogs_name_film">Бешенные псы</string>
+    <string name="buy_me_name_film">Купи меня</string>
+    <string name="last_jedi_name_film">Звездные войны: Последние Джедаи</string>
+    <string name="Details">Детали</string>
+    <string name="film_cover">film cover</string>
 </resources>
