@@ -5,4 +5,5 @@
     <string name="last_jedi_name_film">Звездные войны: Последние Джедаи</string>
     <string name="Details">Детали</string>
     <string name="film_cover">film cover</string>
+    <string name="comment_film">Comment film</string>
 </resources>
