@@ -17,7 +17,7 @@ public class FilmDetails extends AppCompatActivity {
         setContentView(R.layout.activity_film_details);
         int filmId = getIntent().getIntExtra("film_id", -1);
         Film currentFilm = MainActivity.mapFilms.get(filmId);
-        assert currentFilm != null;
+        assert currentFilm != null;  // TODO: 8/31/20 What is mean??)
 
         TextView filmName = findViewById(R.id.film_name);
         filmName.setText(currentFilm.getName());
