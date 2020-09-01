@@ -72,4 +72,16 @@ public class MainActivity extends AppCompatActivity {
         text.setTextColor(TEXT_CHANGE_COLOR);
         changedColorTexts.add(text.getId());
     }
+
+    public void inviteFriend(View view) {
+        Intent inviteIntent = new Intent();
+        inviteIntent.setAction(Intent.ACTION_SEND);
+        inviteIntent.putExtra(Intent.EXTRA_TEXT, "Присоединяйся ко мне в приложении SHIT!");
+        inviteIntent.setType("text/plain");
+
+        Intent chooser = Intent.createChooser(inviteIntent, "В каком приложении?");
+        if (inviteIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(chooser);
+        }
+    }
 }
