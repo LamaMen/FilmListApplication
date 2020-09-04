@@ -1,24 +1,24 @@
 package com.test.films_list_application.models;
 
 public class Film {
-    private final String id;
+    private final int id;
     private final String name;
     private final String description;
-    private final String pathToImage;
+    private final int photoID;
 
-    public Film(String id, String name, String description, String pathToImage) {
+    public Film(int id, String name, String description, int pathToImage) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.pathToImage = pathToImage;
+        this.photoID = pathToImage;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public String getPathToImage() {
-        return pathToImage;
+    public int getPhotoID() {
+        return photoID;
     }
 
     public String getName() {

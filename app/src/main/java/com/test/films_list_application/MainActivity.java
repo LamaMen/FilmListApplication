@@ -10,10 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.test.films_list_application.dao.Films;
 import com.test.films_list_application.models.Film;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             changedColorTexts = savedInstanceState.getIntegerArrayList(KEY_TEXT);
-            assert changedColorTexts != null; // TODO: 8/31/20 What is mean??)
 
-            if (changedColorTexts.size() != 0) {
+            if (changedColorTexts != null && changedColorTexts.size() != 0) {
                 for (Integer text : changedColorTexts) {
                     TextView textView = findViewById(text);
                     textView.setTextColor(TEXT_CHANGE_COLOR);
@@ -42,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        mapFilms.put(R.id.f001, new Film("f001", "Бешенные псы", "Это должно было стать идеальным преступлением. Задумав ограбить ювелирный магазин, криминальный босс Джо Кэбот собрал вместе шестерых опытных и совершенно незнакомых друг с другом преступников. Но с самого начала все пошло не так, и обычный грабеж превратился в кровавую бойню.", "/home/ilia/Projects/Android/Films/app/src/main/res/drawable/dogs.jpeg"));
-        mapFilms.put(R.id.f002, new Film("f002", "Купи меня", "Три девушки — три истории о том, как изменить свою жизнь и чем предстоит пожертвовать, чтобы стать «счастливыми». Порше, олигархи, секс, любовь и мечты о красивой жизни. Смогут ли героини добиться успеха, или они сломаются, так и не дойдя до цели?", "/home/ilia/Projects/Android/Films/app/src/main/res/drawable/buy_me.jpg"));
-        mapFilms.put(R.id.f003, new Film("f003", "Зведные войны: Последние Джедаи", "Новая история о противостоянии света и тьмы, добра и зла начинается после гибели Хана Соло. В Галактике, где Первый Орден и Сопротивление яростно сражаются друг с другом в войне, героиня Рей пробудила в себе Силу. Но что произойдет, когда она встретится с единственным оставшимся в живых рыцарем-джедаем — Люком Скайуокером?", "/drawable/last_jedi.jpeg"));
+        List<Film> films = Films.getInstance().getFilms();
+        for (Film film : films) {
+            mapFilms.put(film.getId(), film);
+        }
     }
 
     @Override
@@ -52,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putIntegerArrayList(KEY_TEXT, changedColorTexts);
     }
-
 
     public void showDetails(View view) {
         Intent openFilmDetails = new Intent(MainActivity.this, FilmDetails.class);
