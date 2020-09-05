@@ -1,4 +1,4 @@
-package com.test.films_list_application;
+package com.test.films_list_application.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,8 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.navigation.NavigationView;
+import com.test.films_list_application.R;
 import com.test.films_list_application.dao.Films;
 import com.test.films_list_application.models.Film;
 
@@ -20,7 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     public final static Map<Integer, Film> mapFilms = new HashMap<>();
 
     private final static String TAG = MainActivity.class.toString();
@@ -33,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         if (savedInstanceState != null) {
             changedColorTexts = savedInstanceState.getIntegerArrayList(KEY_TEXT);
@@ -49,6 +70,33 @@ public class MainActivity extends AppCompatActivity {
         for (Film film : films) {
             mapFilms.put(film.getId(), film);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_about_app:
+                Intent intent = new Intent(this, AboutAppActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_home:
+            default:
+                break;
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override
@@ -73,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDetails(View view) {
-        Intent openFilmDetails = new Intent(MainActivity.this, FilmDetails.class);
+        Intent openFilmDetails = new Intent(MainActivity.this, FilmDetailsActivity.class);
         openFilmDetails.putExtra("film_id", view.getId());
         startActivity(openFilmDetails);
 

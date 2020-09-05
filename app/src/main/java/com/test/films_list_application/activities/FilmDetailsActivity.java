@@ -1,4 +1,4 @@
-package com.test.films_list_application;
+package com.test.films_list_application.activities;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -6,9 +6,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.test.films_list_application.R;
 import com.test.films_list_application.models.Film;
 
-public class FilmDetails extends AppCompatActivity {
+public class FilmDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
