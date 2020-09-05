@@ -3,6 +3,8 @@ package com.test.films_list_application;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -50,6 +52,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.invite_friend) {
+            inviteFriend(item);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putIntegerArrayList(KEY_TEXT, changedColorTexts);
@@ -74,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         changedColorTexts.add(text.getId());
     }
 
-    public void inviteFriend(View view) {
+    private void inviteFriend(MenuItem item) {
         Intent inviteIntent = new Intent();
         inviteIntent.setAction(Intent.ACTION_SEND);
         inviteIntent.putExtra(Intent.EXTRA_TEXT, "Присоединяйся ко мне в приложении SHIT!");
