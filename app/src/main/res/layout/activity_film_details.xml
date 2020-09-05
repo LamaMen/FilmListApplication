@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/film_cover"
@@ -25,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#000"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:gravity="center_vertical|center_horizontal" />
 
     </LinearLayout>
 
@@ -34,18 +36,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#000"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
     <LinearLayout
+        android:paddingVertical="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:visibility="gone">
 
         <EditText
+            android:inputType="text"
             android:id="@+id/film_comment"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:lines="5"
             android:hint="@string/comment_film" />
 
         <CheckBox

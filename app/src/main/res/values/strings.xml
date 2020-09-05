@@ -3,8 +3,9 @@
     <string name="dogs_name_film">Бешенные псы</string>
     <string name="buy_me_name_film">Купи меня</string>
     <string name="last_jedi_name_film">Звездные войны: Последние Джедаи</string>
-    <string name="Details">Детали</string>
+    <string name="details">Детали</string>
     <string name="film_cover">film cover</string>
     <string name="comment_film">Comment film</string>
     <string name="invite_friend">Пригласить друга!</string>
+    <string name="test_string">Это должно было стать идеальным преступлением. Задумав ограбить ювелирный магазин, криминальный босс Джо Кэбот собрал вместе шестерых опытных и совершенно незнакомых друг с другом преступников. Но с самого начала все пошло не так, и обычный грабеж превратился в кровавую бойню.</string>
 </resources>
