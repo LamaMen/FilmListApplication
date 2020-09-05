@@ -1,26 +1,26 @@
 <resources>
     <string name="app_name">Film List Application</string>
 
+    <string name="details">Details</string>
+    <string name="film_cover">Film cover</string>
+    <string name="comment_film">Comment film</string>
+    <string name="invite_friend">Invite friend</string>
+
     <string name="dogs_name_film">Бешенные псы</string>
     <string name="buy_me_name_film">Купи меня</string>
     <string name="last_jedi_name_film">Звездные войны: Последние Джедаи</string>
-    <string name="details">Детали</string>
-    <string name="film_cover">film cover</string>
-    <string name="comment_film">Comment film</string>
-    <string name="invite_friend">Пригласить друга!</string>
+
     <string name="test_string">Это должно было стать идеальным преступлением. Задумав ограбить ювелирный магазин, криминальный босс Джо Кэбот собрал вместе шестерых опытных и совершенно незнакомых друг с другом преступников. Но с самого начала все пошло не так, и обычный грабеж превратился в кровавую бойню.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Developer: Ilia Rodionov</string>
+    <string name="nav_header_subtitle">https://github.com/LamaMen</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_gallery">About App</string>
+
+    <string name="about_application">About Application</string>
+    <string name="about_app_description">\t\tThis is my first Android learning app. On it, I worked out all the new possibilities that I studied. This is a simple application to view your movie list.</string>
 </resources>
