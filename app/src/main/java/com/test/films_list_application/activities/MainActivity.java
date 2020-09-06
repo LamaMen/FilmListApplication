@@ -10,7 +10,9 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity
     public final static Map<Integer, Film> mapFilms = new HashMap<>();
 
     private final static String TAG = MainActivity.class.toString();
-    private static final String KEY_TEXT = "TextView";
     private static final int TEXT_CHANGE_COLOR = Color.rgb(82, 82, 82);
 
     @Override
@@ -127,18 +128,17 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-//        changeTextColor(container);
+        changeTextColor(container);
     }
 
-//    private void changeTextColor(View container) {
-//        if (!(container instanceof ViewGroup)) {
-//            return;
-//        }
-//
-//        TextView text = (TextView) ((ViewGroup) container).getChildAt(1);
-//        text.setTextColor(TEXT_CHANGE_COLOR);
-//        changedColorTexts.add(text.getId());
-//    }
+    private void changeTextColor(View container) {
+        if (!(container instanceof ViewGroup)) {
+            return;
+        }
+
+        TextView text = (TextView) ((ViewGroup) container).getChildAt(1);
+        text.setTextColor(TEXT_CHANGE_COLOR);
+    }
 
     private void inviteFriend() {
         Intent inviteIntent = new Intent();
