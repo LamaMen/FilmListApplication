@@ -1,15 +1,17 @@
 package com.test.films_list_application.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.animation.DecelerateInterpolator;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,11 +19,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.test.films_list_application.BasicAnimatorListener;
 import com.test.films_list_application.R;
 import com.test.films_list_application.dao.Films;
 import com.test.films_list_application.models.Film;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +33,6 @@ public class MainActivity extends AppCompatActivity
     public final static Map<Integer, Film> mapFilms = new HashMap<>();
 
     private final static String TAG = MainActivity.class.toString();
-
-    private ArrayList<Integer> changedColorTexts = new ArrayList<>();
     private static final String KEY_TEXT = "TextView";
     private static final int TEXT_CHANGE_COLOR = Color.rgb(82, 82, 82);
 
@@ -53,18 +53,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-        if (savedInstanceState != null) {
-            changedColorTexts = savedInstanceState.getIntegerArrayList(KEY_TEXT);
-
-            if (changedColorTexts != null && changedColorTexts.size() != 0) {
-                for (Integer text : changedColorTexts) {
-                    TextView textView = findViewById(text);
-                    textView.setTextColor(TEXT_CHANGE_COLOR);
-                }
-            }
-        }
 
         List<Film> films = Films.getInstance().getFilms();
         for (Film film : films) {
@@ -108,38 +96,51 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.invite_friend) {
-            inviteFriend(item);
+            inviteFriend();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putIntegerArrayList(KEY_TEXT, changedColorTexts);
-    }
-
     public void showDetails(View view) {
         Intent openFilmDetails = new Intent(MainActivity.this, FilmDetailsActivity.class);
         openFilmDetails.putExtra("film_id", view.getId());
-        startActivity(openFilmDetails);
 
-        changeTextColor(view);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        View container = (View) view.getParent();
+        View card = (View) container.getParent();
+
+        float startPosition = card.getTranslationX();
+        ObjectAnimator trY = ObjectAnimator.ofFloat(card, "translationX", displayMetrics.widthPixels);
+        AnimatorSet set = new AnimatorSet();
+        set.play(trY);
+        set.setDuration(350);
+        set.setInterpolator(new DecelerateInterpolator());
+        set.start();
+        set.addListener(new BasicAnimatorListener() {
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                startActivity(openFilmDetails);
+                card.setTranslationX(startPosition);
+            }
+        });
+
+//        changeTextColor(container);
     }
 
-    private void changeTextColor(View button) {
-        View parent = (View) button.getParent();
-        if (!(parent instanceof ViewGroup)) {
-            return;
-        }
+//    private void changeTextColor(View container) {
+//        if (!(container instanceof ViewGroup)) {
+//            return;
+//        }
+//
+//        TextView text = (TextView) ((ViewGroup) container).getChildAt(1);
+//        text.setTextColor(TEXT_CHANGE_COLOR);
+//        changedColorTexts.add(text.getId());
+//    }
 
-        TextView text = (TextView) ((ViewGroup) parent).getChildAt(1);
-        text.setTextColor(TEXT_CHANGE_COLOR);
-        changedColorTexts.add(text.getId());
-    }
-
-    private void inviteFriend(MenuItem item) {
+    private void inviteFriend() {
         Intent inviteIntent = new Intent();
         inviteIntent.setAction(Intent.ACTION_SEND);
         inviteIntent.putExtra(Intent.EXTRA_TEXT, "Присоединяйся ко мне в приложении SHIT!");
