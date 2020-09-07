@@ -11,9 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.AboutAppActivity" />
         <activity android:name=".activities.FilmDetailsActivity" />
-        <activity
-            android:name=".activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
