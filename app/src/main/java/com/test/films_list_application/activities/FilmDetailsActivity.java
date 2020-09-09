@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.test.films_list_application.R;
 import com.test.films_list_application.models.Film;
@@ -15,6 +16,10 @@ public class FilmDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_details);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         int filmId = getIntent().getIntExtra("film_id", -1);
         Film currentFilm = MainActivity.mapFilms.get(filmId);
@@ -31,5 +36,10 @@ public class FilmDetailsActivity extends AppCompatActivity {
 
         TextView filmDescription = findViewById(R.id.film_description);
         filmDescription.setText(currentFilm.getDescription());
+    }
+
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

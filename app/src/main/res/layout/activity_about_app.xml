@@ -9,11 +9,11 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        android:theme="@style/AppTheme.AppBarOverlay"
         style="@style/AppTheme.PopupOverlay"
         android:layout_width="fill_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/about_application"
-        app:titleTextAppearance="@style/TextStyle" />
+        app:title="@string/about_application" />
 
     <TextView
         android:layout_width="match_parent"
