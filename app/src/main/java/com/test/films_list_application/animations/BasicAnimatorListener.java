@@ -1,4 +1,4 @@
-package com.test.films_list_application;
+package com.test.films_list_application.animations;
 
 import android.animation.Animator;
 

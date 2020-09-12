@@ -21,8 +21,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.test.films_list_application.BasicAnimatorListener;
 import com.test.films_list_application.R;
+import com.test.films_list_application.animations.BasicAnimatorListener;
 import com.test.films_list_application.dao.Films;
 import com.test.films_list_application.models.Film;
 
