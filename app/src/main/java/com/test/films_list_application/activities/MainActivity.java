@@ -3,6 +3,9 @@ package com.test.films_list_application.activities;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -36,17 +39,15 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public final static Map<Integer, Film> mapFilms = new HashMap<>();
+    private final static String TAG = MainActivity.class.toString();
+    private static final int TEXT_CHANGE_COLOR = Color.rgb(82, 82, 82);
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-
-    public final static Map<Integer, Film> mapFilms = new HashMap<>();
-
-    private final static String TAG = MainActivity.class.toString();
-    private static final int TEXT_CHANGE_COLOR = Color.rgb(82, 82, 82);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,9 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(this, AboutAppActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_exit:
+                showExitDialog();
+                break;
             case R.id.nav_home:
             default:
                 break;
@@ -91,6 +95,27 @@ public class MainActivity extends AppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showExitDialog() {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        DialogInterface.OnClickListener lst =
+                (dialog, which) -> {
+                    switch (which) {
+                        case Dialog.BUTTON_POSITIVE:
+                            finish();
+                            break;
+                        case Dialog.BUTTON_NEGATIVE:
+                            break;
+                    }
+                    dialog.dismiss();
+                };
+        bld.setMessage("Вы уверены, что хотите выйти из приложения?")
+                .setTitle("Выход из приложения")
+                .setNegativeButton("Нет", lst)
+                .setPositiveButton("Да", lst)
+                .create()
+                .show();
     }
 
     @Override

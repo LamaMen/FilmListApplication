@@ -18,8 +18,9 @@
     <string name="nav_header_subtitle">https://github.com/LamaMen</string>
     <string name="nav_header_desc">Navigation header</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">About App</string>
+    <string name="drawer_menu_home">Home</string>
+    <string name="drawer_menu_gallery">About App</string>
+    <string name="drawer_menu_exit">Exit</string>
 
     <string name="about_application">About Application</string>
     <string name="about_app_description">\t\tThis is my first Android learning app. On it, I worked out all the new possibilities that I studied. This is a simple application to view your movie list.</string>
