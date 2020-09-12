@@ -8,6 +8,7 @@
     tools:context=".activities.FilmDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -27,42 +28,47 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/activity_horizontal_spacing"
             android:paddingVertical="@dimen/activity_vertical_spacing">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/content_vertical_spacing"
-                tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/film_cover"
+                android:layout_width="120dp"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/film_cover" />
 
-                <ImageView
-                    android:id="@+id/film_cover"
-                    android:layout_width="120dp"
-                    android:layout_height="200dp"
-                    android:layout_marginEnd="@dimen/content_vertical_spacing"
-                    android:contentDescription="@string/film_cover" />
-
-                <TextView
-                    android:id="@+id/film_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:textAppearance="@style/BigMainText" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/film_name"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:layout_constraintWidth_default="spread"
+                app:layout_constraintStart_toEndOf="@id/film_cover"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="@dimen/content_vertical_spacing"
+                android:gravity="center_vertical|center_horizontal"
+                android:textAppearance="@style/BigMainText" />
 
             <TextView
                 android:id="@+id/film_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintWidth_default="spread"
+                app:layout_constraintHeight_default="wrap"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/film_cover"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/content_vertical_spacing"
                 android:textAppearance="@style/MainTextHeading" />
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
