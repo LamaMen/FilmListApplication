@@ -1,7 +1,8 @@
 <resources>
-    <!-- Base application theme. -->
+
+    <!-- Application themes -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -15,9 +16,33 @@
         <item name="android:elevation">4dp</item>
     </style>
 
-    <style name="TextStyle" parent="@android:style/TextAppearance">
+    <!--  Item Styling  -->
+
+    <style name="CardStyle">
+        <item name="cardBackgroundColor">#E4E4E4</item>
+        <item name="cardCornerRadius">10dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textAppearance">@style/LightTextHeading</item>
+        <item name="cornerRadius">5dp</item>
+    </style>
+
+    <!--  Text Styling  -->
+
+    <style name="MainTextHeading" parent="@android:style/TextAppearance">
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="LightTextHeading" parent="MainTextHeading">
         <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="BigMainText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">30sp</item>
     </style>
 
 </resources>
