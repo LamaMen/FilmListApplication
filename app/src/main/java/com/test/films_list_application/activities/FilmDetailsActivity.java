@@ -10,14 +10,25 @@ import androidx.appcompat.widget.Toolbar;
 import com.test.films_list_application.R;
 import com.test.films_list_application.models.Film;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class FilmDetailsActivity extends AppCompatActivity {
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.film_name)
+    TextView filmName;
+    @BindView(R.id.film_cover)
+    ImageView filmCover;
+    @BindView(R.id.film_description)
+    TextView filmDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_details);
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -28,13 +39,8 @@ public class FilmDetailsActivity extends AppCompatActivity {
             return;
         }
 
-        TextView filmName = findViewById(R.id.film_name);
         filmName.setText(currentFilm.getName());
-
-        ImageView filmCover = findViewById(R.id.film_cover);
         filmCover.setImageResource(currentFilm.getPhotoID());
-
-        TextView filmDescription = findViewById(R.id.film_description);
         filmDescription.setText(currentFilm.getDescription());
     }
 
