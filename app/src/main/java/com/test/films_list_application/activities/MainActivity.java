@@ -1,21 +1,12 @@
 package com.test.films_list_application.activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +16,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.test.films_list_application.R;
-import com.test.films_list_application.animations.BasicAnimatorListener;
+import com.test.films_list_application.activities.fragments.AboutAppFragment;
+import com.test.films_list_application.activities.fragments.FilmDetailsFragment;
+import com.test.films_list_application.activities.fragments.ListFilmsFragment;
 import com.test.films_list_application.dao.Films;
-import com.test.films_list_application.models.Film;
+import com.test.films_list_application.dao.models.Film;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,11 +30,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ListFilmsFragment.OnFilmClickListener {
 
     public final static Map<Integer, Film> mapFilms = new HashMap<>();
     private final static String TAG = MainActivity.class.toString();
-    private static final int TEXT_CHANGE_COLOR = Color.rgb(82, 82, 82);
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
@@ -54,6 +46,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_content, new ListFilmsFragment(), ListFilmsFragment.TAG)
+                .commit();
 
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,31 +67,45 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_about_app:
-                Intent intent = new Intent(this, AboutAppActivity.class);
-                startActivity(intent);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.main_content, new AboutAppFragment(), AboutAppFragment.TAG)
+                        .commit();
                 break;
             case R.id.nav_exit:
                 showExitDialog();
                 break;
             case R.id.nav_home:
+                getSupportFragmentManager().popBackStack();
+                break;
             default:
                 break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFilmItemClick(int id) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.main_content, FilmDetailsFragment.newInstance(id), FilmDetailsFragment.TAG)
+                .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     private void showExitDialog() {
@@ -110,6 +121,7 @@ public class MainActivity extends AppCompatActivity
                     }
                     dialog.dismiss();
                 };
+
         bld.setMessage("Вы уверены, что хотите выйти из приложения?")
                 .setTitle("Выход из приложения")
                 .setNegativeButton("Нет", lst)
@@ -133,47 +145,10 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void showDetails(View view) {
-        Intent openFilmDetails = new Intent(MainActivity.this, FilmDetailsActivity.class);
-        openFilmDetails.putExtra("film_id", view.getId());
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        View container = (View) view.getParent();
-        View card = (View) container.getParent();
-
-        float startPosition = card.getTranslationX();
-        ObjectAnimator trY = ObjectAnimator.ofFloat(card, "translationX", displayMetrics.widthPixels);
-        AnimatorSet set = new AnimatorSet();
-        set.play(trY);
-        set.setDuration(350);
-        set.setInterpolator(new DecelerateInterpolator());
-        set.start();
-        set.addListener(new BasicAnimatorListener() {
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                startActivity(openFilmDetails);
-                card.setTranslationX(startPosition);
-            }
-        });
-
-        changeTextColor(container);
-    }
-
-    private void changeTextColor(View container) {
-        if (!(container instanceof ViewGroup)) {
-            return;
-        }
-
-        TextView text = (TextView) ((ViewGroup) container).getChildAt(1);
-        text.setTextColor(TEXT_CHANGE_COLOR);
-    }
-
     private void inviteFriend() {
         Intent inviteIntent = new Intent();
         inviteIntent.setAction(Intent.ACTION_SEND);
-        inviteIntent.putExtra(Intent.EXTRA_TEXT, "Присоединяйся ко мне в приложении SHIT!");
+        inviteIntent.putExtra(Intent.EXTRA_TEXT, "Присоединяйся ко мне в приложении Film List App!");
         inviteIntent.setType("text/plain");
 
         Intent chooser = Intent.createChooser(inviteIntent, "В каком приложении?");
