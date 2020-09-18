@@ -1,7 +1,7 @@
 package com.test.films_list_application.dao;
 
 import com.test.films_list_application.R;
-import com.test.films_list_application.models.Film;
+import com.test.films_list_application.dao.models.Film;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.test.films_list_application.models;
+package com.test.films_list_application.dao.models;
 
 public class Film {
     private final int id;
