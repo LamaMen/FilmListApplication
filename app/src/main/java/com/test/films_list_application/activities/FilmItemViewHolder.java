@@ -1,5 +1,6 @@
 package com.test.films_list_application.activities;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,14 +25,21 @@ public class FilmItemViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.film_show_details)
     public MaterialButton filmShowDetailsButton;
 
-    public FilmItemViewHolder(@NonNull View itemView) {
+    private final OnButtonClickListener listener;
+
+    public FilmItemViewHolder(@NonNull View itemView, OnButtonClickListener listener) {
         super(itemView);
+        this.listener = listener;
         ButterKnife.bind(this, itemView);
     }
 
     public void bind(Film film) {
         filmName.setText(film.getName());
         filmCover.setImageResource(film.getPhotoID());
-        filmShowDetailsButton.setOnClickListener(v -> Log.d(ListFilmsFragment.TAG, "Button on item " + film.getId() + " pressed"));
+        filmShowDetailsButton.setOnClickListener(v -> {
+            listener.onButtonPress(film.getId());
+            filmName.setTextColor(Color.rgb(82, 82, 82));
+            Log.d(ListFilmsFragment.TAG, "Button on item " + film.getId() + " pressed");
+        });
     }
 }

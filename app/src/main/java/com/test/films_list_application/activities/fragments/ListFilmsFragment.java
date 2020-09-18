@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.FilmItemsAdapter;
+import com.test.films_list_application.activities.OnButtonClickListener;
 import com.test.films_list_application.dao.Films;
 
-public class ListFilmsFragment extends Fragment {
+public class ListFilmsFragment extends Fragment implements OnButtonClickListener {
     public final static String TAG = ListFilmsFragment.class.toString();
 
     private OnFilmClickListener listener = null;
@@ -27,7 +28,7 @@ public class ListFilmsFragment extends Fragment {
         RecyclerView recyclerView = fragment.findViewById(R.id.list_film);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new FilmItemsAdapter(inflater, Films.getInstance().getFilms()));
+        recyclerView.setAdapter(new FilmItemsAdapter(inflater, Films.getInstance().getFilms(), this));
         return fragment;
     }
 
@@ -50,18 +51,10 @@ public class ListFilmsFragment extends Fragment {
 //        })
     }
 
-    private void onButtonPress(View item, int id) {
+    public void onButtonPress(int id) {
         if (listener != null) {
             listener.onFilmItemClick(id);
         }
-
-//        View container = (View) item.getParent();
-//        if (!(container instanceof ViewGroup)) {
-//            return;
-//        }
-//
-//        TextView text = (TextView) ((ViewGroup) container).getChildAt(1);
-//        text.setTextColor(getResources().getColor(R.color.selectedItem));
     }
 
 

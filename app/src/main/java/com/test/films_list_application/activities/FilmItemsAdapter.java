@@ -14,16 +14,18 @@ import java.util.List;
 public class FilmItemsAdapter extends RecyclerView.Adapter<FilmItemViewHolder> {
     private final LayoutInflater inflater;
     private final List<Film> items;
+    private final OnButtonClickListener buttonClickListener;
 
-    public FilmItemsAdapter(LayoutInflater inflater, List<Film> items) {
+    public FilmItemsAdapter(LayoutInflater inflater, List<Film> items, OnButtonClickListener buttonClickListener) {
         this.inflater = inflater;
         this.items = items;
+        this.buttonClickListener = buttonClickListener;
     }
 
     @NonNull
     @Override
     public FilmItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new FilmItemViewHolder(inflater.inflate(R.layout.item_film, parent, false));
+        return new FilmItemViewHolder(inflater.inflate(R.layout.item_film, parent, false), buttonClickListener);
     }
 
     @Override
