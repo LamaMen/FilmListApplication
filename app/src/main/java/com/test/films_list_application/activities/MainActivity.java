@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
                 showExitDialog();
                 break;
             case R.id.nav_home:
-                getSupportFragmentManager().popBackStack();
+                returnMainFragment();
                 break;
             default:
                 break;
@@ -119,17 +119,20 @@ public class MainActivity extends AppCompatActivity
             drawerLayout.closeDrawer(GravityCompat.START);
 
         } else {
-            int backStackCount = getSupportFragmentManager().getBackStackEntryCount();
-
-            if (backStackCount >= 1) {
-                getSupportFragmentManager().popBackStack();
-                if (backStackCount == 1) {
-                    showUpButton(false);
-                }
-            } else {
+            if (!returnMainFragment()) {
                 super.onBackPressed();
             }
         }
+    }
+
+    private boolean returnMainFragment() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) return false;
+
+        getSupportFragmentManager().popBackStack();
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            showUpButton(false);
+        }
+        return true;
     }
 
     private void resolveUpButtonWithFragmentStack() {
