@@ -1,5 +1,7 @@
 package com.test.films_list_application.activities;
 
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -7,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.R;
+import com.test.films_list_application.activities.fragments.ListFilmsFragment;
 import com.test.films_list_application.dao.models.Film;
 
 import java.util.List;
@@ -25,12 +28,17 @@ public class FilmItemsAdapter extends RecyclerView.Adapter<FilmItemViewHolder> {
     @NonNull
     @Override
     public FilmItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new FilmItemViewHolder(inflater.inflate(R.layout.item_film, parent, false), buttonClickListener);
+        return new FilmItemViewHolder(inflater.inflate(R.layout.item_film, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull FilmItemViewHolder holder, int position) {
-        holder.bind(items.get(position));
+        Film currentFilm = items.get(position);
+        holder.bind(currentFilm);
+        holder.itemView.setOnClickListener(v -> {
+            buttonClickListener.onButtonPress(currentFilm.getId());
+            Log.d(ListFilmsFragment.TAG, "Button on item " + currentFilm.getId() + " pressed");
+        });
     }
 
     @Override

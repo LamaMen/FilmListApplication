@@ -30,24 +30,11 @@
             android:layout_marginStart="@dimen/activity_horizontal_spacing"
             android:gravity="center_vertical"
             android:textAppearance="@style/MainTextHeading"
-            app:layout_constraintBottom_toTopOf="@id/film_show_details"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/film_cover"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/last_jedi_name_film" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/film_show_details"
-            style="@style/ButtonStyle"
-            android:layout_width="100dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/activity_horizontal_spacing"
-            android:text="@string/details"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@id/film_cover"
-            app:layout_constraintTop_toBottomOf="@id/film_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
