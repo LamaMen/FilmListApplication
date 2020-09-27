@@ -11,7 +11,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay">
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="android:background">?colorPrimary</item>
         <item name="android:elevation">4dp</item>
     </style>

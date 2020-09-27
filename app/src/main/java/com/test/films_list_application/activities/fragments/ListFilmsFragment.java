@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.R;
+import com.test.films_list_application.activities.FilmItemsAdapter;
+import com.test.films_list_application.activities.OnButtonClickListener;
+import com.test.films_list_application.dao.Films;
 
-public class ListFilmsFragment extends Fragment {
+public class ListFilmsFragment extends Fragment implements OnButtonClickListener {
     public final static String TAG = ListFilmsFragment.class.toString();
 
     private OnFilmClickListener listener = null;
@@ -19,7 +24,12 @@ public class ListFilmsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list_films, container, false);
+        View fragment = inflater.inflate(R.layout.fragment_list_films, container, false);
+        RecyclerView recyclerView = fragment.findViewById(R.id.list_film);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new FilmItemsAdapter(inflater, Films.getInstance().getFilms(), this));
+        return fragment;
     }
 
     @Override
@@ -36,31 +46,15 @@ public class ListFilmsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.f001).setOnClickListener(v -> {
-            onButtonPress(v, R.id.f001);
-        });
-
-        view.findViewById(R.id.f002).setOnClickListener(v -> {
-            onButtonPress(v, R.id.f002);
-        });
-
-        view.findViewById(R.id.f003).setOnClickListener(v -> {
-            onButtonPress(v, R.id.f003);
-        });
+//        view.findViewById(R.id.f001).setOnClickListener(v -> {
+//            onButtonPress(v, R.id.f001);
+//        })
     }
 
-    private void onButtonPress(View item, int id) {
+    public void onButtonPress(int id) {
         if (listener != null) {
             listener.onFilmItemClick(id);
         }
-
-//        View container = (View) item.getParent();
-//        if (!(container instanceof ViewGroup)) {
-//            return;
-//        }
-//
-//        TextView text = (TextView) ((ViewGroup) container).getChildAt(1);
-//        text.setTextColor(getResources().getColor(R.color.selectedItem));
     }
 
 

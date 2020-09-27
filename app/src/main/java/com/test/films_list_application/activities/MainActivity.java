@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,12 +35,16 @@ public class MainActivity extends AppCompatActivity
 
     public final static Map<Integer, Film> mapFilms = new HashMap<>();
     private final static String TAG = MainActivity.class.toString();
-    @BindView(R.id.toolbar)
+    @BindView(R.id.main_toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
-    DrawerLayout drawer;
+    DrawerLayout drawerLayout;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+
+    private ActionBarDrawerToggle drawerToggle;
+    private ActionBar actionBar;
+    private boolean toolBarNavigationListenerRegistered = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +52,25 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_content, new ListFilmsFragment(), ListFilmsFragment.TAG)
-                .commit();
-
         setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar,
+        actionBar = getSupportActionBar();
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState != null) {
+            resolveUpButtonWithFragmentStack();
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_content, new ListFilmsFragment(), ListFilmsFragment.TAG)
+                    .commit();
+        }
 
         List<Film> films = Films.getInstance().getFilms();
         for (Film film : films) {
@@ -86,7 +98,7 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-        drawer.closeDrawer(GravityCompat.START);
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -97,14 +109,49 @@ public class MainActivity extends AppCompatActivity
                 .addToBackStack(null)
                 .replace(R.id.main_content, FilmDetailsFragment.newInstance(id), FilmDetailsFragment.TAG)
                 .commit();
+
+        showUpButton(true);
     }
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+
         } else {
-            super.onBackPressed();
+            int backStackCount = getSupportFragmentManager().getBackStackEntryCount();
+
+            if (backStackCount >= 1) {
+                getSupportFragmentManager().popBackStack();
+                if (backStackCount == 1) {
+                    showUpButton(false);
+                }
+            } else {
+                super.onBackPressed();
+            }
+        }
+    }
+
+    private void resolveUpButtonWithFragmentStack() {
+        showUpButton(getSupportFragmentManager().getBackStackEntryCount() > 0);
+    }
+
+    private void showUpButton(boolean show) {
+        if (show) {
+            drawerToggle.setDrawerIndicatorEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+            if (!toolBarNavigationListenerRegistered) {
+                drawerToggle.setToolbarNavigationClickListener(v -> onBackPressed());
+                toolBarNavigationListenerRegistered = true;
+            }
+
+        } else {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            drawerToggle.setDrawerIndicatorEnabled(true);
+
+            drawerToggle.setToolbarNavigationClickListener(null);
+            toolBarNavigationListenerRegistered = false;
         }
     }
 
