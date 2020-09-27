@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
 
     public final static Map<Integer, Film> mapFilms = new HashMap<>();
     private final static String TAG = MainActivity.class.toString();
-    @BindView(R.id.toolbar)
+    @BindView(R.id.main_toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
