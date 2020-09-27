@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="details">Детали</string>
+    <string name="film_cover">Обложка фильма</string>
+    <string name="comment_film">Коментировать фильм</string>
+    <string name="invite_friend">Пригласить друга</string>
+
+    <string name="dogs_name_film">Бешенные псы</string>
+    <string name="buy_me_name_film">Купи меня</string>
+    <string name="last_jedi_name_film">Звездные войны: Последние Джедаи</string>
+
+    <string name="test_string">Это должно было стать идеальным преступлением. Задумав ограбить ювелирный магазин, криминальный босс Джо Кэбот собрал вместе шестерых опытных и совершенно незнакомых друг с другом преступников. Но с самого начала все пошло не так, и обычный грабеж превратился в кровавую бойню.</string>
+
+    <string name="navigation_drawer_open">Открыть панель навигации</string>
+    <string name="navigation_drawer_close">Закрыть панель навигации</string>
+    <string name="nav_header_title">Разработчик: Илья Родионов</string>
+    <string name="nav_header_subtitle">https://github.com/LamaMen</string>
+    <string name="nav_header_desc">Заголовок навигации</string>
+
+    <string name="drawer_menu_home">Главная</string>
+
+    <string name="drawer_menu_gallery">О приложении</string>
+    <string name="about_app_description">\t\tЭто мое первое обучающее приложение для Android. На нем я отработал все новые возможности, которые изучал. Это простое приложение для просмотра списка фильмов.</string>
+
+    <string name="drawer_menu_exit">Выйти из приложения</string>
+
+
+    <string name="exit_dialog_message">Вы уверены, что хотите выйти из приложения?</string>
+    <string name="exit_dialog_title">Выход из приложения</string>
+
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <string name="invite_friend_message">"Присоединяйся ко мне в приложении Film List App!"</string>
+    <string name="invite_friend_сhose_app">В каком приложении?</string>
+
+</resources>

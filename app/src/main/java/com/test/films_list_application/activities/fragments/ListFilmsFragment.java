@@ -46,9 +46,6 @@ public class ListFilmsFragment extends Fragment implements OnButtonClickListener
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        view.findViewById(R.id.f001).setOnClickListener(v -> {
-//            onButtonPress(v, R.id.f001);
-//        })
     }
 
     public void onButtonPress(int id) {

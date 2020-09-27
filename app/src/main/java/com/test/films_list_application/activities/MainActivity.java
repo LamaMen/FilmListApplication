@@ -126,10 +126,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private boolean returnMainFragment() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) return false;
+        int backStack = getSupportFragmentManager().getBackStackEntryCount();
+        if (backStack == 0) return false;
 
         getSupportFragmentManager().popBackStack();
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+        if (backStack >= 1) {
             showUpButton(false);
         }
         return true;
@@ -172,10 +173,10 @@ public class MainActivity extends AppCompatActivity
                     dialog.dismiss();
                 };
 
-        bld.setMessage("Вы уверены, что хотите выйти из приложения?")
-                .setTitle("Выход из приложения")
-                .setNegativeButton("Нет", lst)
-                .setPositiveButton("Да", lst)
+        bld.setMessage(getString(R.string.exit_dialog_message))
+                .setTitle(getString(R.string.exit_dialog_title))
+                .setNegativeButton(getString(R.string.no), lst)
+                .setPositiveButton(getString(R.string.yes), lst)
                 .create()
                 .show();
     }
@@ -198,10 +199,10 @@ public class MainActivity extends AppCompatActivity
     private void inviteFriend() {
         Intent inviteIntent = new Intent();
         inviteIntent.setAction(Intent.ACTION_SEND);
-        inviteIntent.putExtra(Intent.EXTRA_TEXT, "Присоединяйся ко мне в приложении Film List App!");
+        inviteIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.invite_friend_message));
         inviteIntent.setType("text/plain");
 
-        Intent chooser = Intent.createChooser(inviteIntent, "В каком приложении?");
+        Intent chooser = Intent.createChooser(inviteIntent, getString(R.string.invite_friend_сhose_app));
         if (inviteIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(chooser);
         }

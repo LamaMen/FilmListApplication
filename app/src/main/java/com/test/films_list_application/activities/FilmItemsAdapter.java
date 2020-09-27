@@ -1,6 +1,5 @@
 package com.test.films_list_application.activities;
 
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
