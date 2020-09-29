@@ -30,11 +30,34 @@
             android:layout_marginStart="@dimen/activity_horizontal_spacing"
             android:gravity="center_vertical"
             android:textAppearance="@style/MainTextHeading"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/film_description"
+            app:layout_constraintEnd_toStartOf="@id/like_button"
             app:layout_constraintStart_toEndOf="@id/film_cover"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/last_jedi_name_film" />
+
+        <CheckBox
+            android:id="@+id/like_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/ic_like"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/film_description"
+            app:layout_constraintStart_toEndOf="@id/film_name"/>
+
+        <TextView
+            android:id="@+id/film_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/activity_horizontal_spacing"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/film_cover"
+            app:layout_constraintTop_toBottomOf="@id/film_name"
+            tools:text="@string/test_string" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
