@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.R;
-import com.test.films_list_application.activities.FilmItemsAdapter;
+import com.test.films_list_application.activities.Adapters.FilmItemsAdapter;
 import com.test.films_list_application.dao.Films;
+import com.test.films_list_application.dao.models.Film;
+
+import java.util.List;
 
 public class ListFilmsFragment extends Fragment implements FilmItemsAdapter.OnItemFilmClickListener {
     public final static String TAG = ListFilmsFragment.class.toString();
@@ -35,12 +38,23 @@ public class ListFilmsFragment extends Fragment implements FilmItemsAdapter.OnIt
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fragment = inflater.inflate(R.layout.fragment_list_films, container, false);
-        RecyclerView recyclerView = fragment.findViewById(R.id.list_film);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new FilmItemsAdapter(inflater, Films.getInstance().getFilms(), this));
-        return fragment;
+        if (getArguments() != null) {
+            View fragment = inflater.inflate(R.layout.fragment_list_films, container, false);
+            RecyclerView recyclerView = fragment.findViewById(R.id.list_film);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+
+            if (getArguments().getBoolean(KEY_IS_MAIN_SCREEN)) {
+                recyclerView.setAdapter(new FilmItemsAdapter(inflater, Films.getInstance().getFilms(), this));
+            } else {
+                recyclerView.setAdapter(new FilmItemsAdapter(inflater, Films.getInstance().getFavoriteFilms(), this));
+            }
+
+            return fragment;
+        } else {
+            getActivity().onBackPressed();
+            return null;
+        }
     }
 
     @Override
