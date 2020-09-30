@@ -1,18 +1,15 @@
 package com.test.films_list_application.dao;
 
-import android.util.Log;
-
 import com.test.films_list_application.R;
 import com.test.films_list_application.dao.models.Film;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Films {
     private static Films instance;
     private final List<Film> films = new ArrayList<>();
+    private final List<Film> favoriteFilms = new ArrayList<>();
 
     private Films() {
         films.add(new Film(1, "Бешенные псы", "Это должно было стать идеальным преступлением. Задумав ограбить ювелирный магазин, криминальный босс Джо Кэбот собрал вместе шестерых опытных и совершенно незнакомых друг с другом преступников. Но с самого начала все пошло не так, и обычный грабеж превратился в кровавую бойню.", R.drawable.dogs));
@@ -31,21 +28,17 @@ public class Films {
         return films;
     }
 
-    public void addFavoriteFilm(int index) {
-        films.get(index).setFavorite(true);
+    public void addFavoriteFilm(Film addedFilm) {
+        addedFilm.setFavorite(true);
+        favoriteFilms.add(addedFilm);
     }
 
-    public void removeFilmFromFavorite(int index) {
-        films.get(index).setFavorite(false);
+    public void removeFilmFromFavorite(Film removingFilm) {
+        removingFilm.setFavorite(false);
+        favoriteFilms.remove(removingFilm);
     }
 
     public List<Film> getFavoriteFilms() {
-        List<Film> favorite = new ArrayList<>();
-        for (Film film: films) {
-            if (film.isFavorite()) {
-                favorite.add(film);
-            }
-        }
-        return favorite;
+        return favoriteFilms;
     }
 }
