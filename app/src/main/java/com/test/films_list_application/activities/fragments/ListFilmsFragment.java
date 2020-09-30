@@ -17,8 +17,20 @@ import com.test.films_list_application.dao.Films;
 
 public class ListFilmsFragment extends Fragment implements FilmItemsAdapter.OnItemFilmClickListener {
     public final static String TAG = ListFilmsFragment.class.toString();
+    private static final String KEY_IS_MAIN_SCREEN = "IS_MAIN_SCREEN";
 
     private OnFilmClickListener listener = null;
+
+    public static ListFilmsFragment newInstance(boolean isMainScreen) {
+        ListFilmsFragment fragment = new ListFilmsFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(KEY_IS_MAIN_SCREEN, isMainScreen);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
 
     @Nullable
     @Override

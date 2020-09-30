@@ -20,6 +20,8 @@
 
     <string name="drawer_menu_home">Home</string>
 
+    <string name="drawer_menu_favorite">Favorite films</string>
+
     <string name="drawer_menu_gallery">About Application</string>
     <string name="about_app_description">\t\tThis is my first Android learning app. On it, I worked out all the new possibilities that I studied. This is a simple application to view your movie list.</string>
 

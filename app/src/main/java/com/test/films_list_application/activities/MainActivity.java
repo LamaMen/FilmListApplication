@@ -66,10 +66,7 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState != null) {
             resolveUpButtonWithFragmentStack();
         } else {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_content, new ListFilmsFragment(), ListFilmsFragment.TAG)
-                    .commit();
+            openMainScreen();
         }
 
         List<Film> films = Films.getInstance().getFilms();
@@ -81,18 +78,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.nav_home:
+                openMainScreen();
+                break;
+            case R.id.nav_favorite_films:
+                openFavoriteFilmsScreen();
+                break;
             case R.id.nav_about_app:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.main_content, new AboutAppFragment(), AboutAppFragment.TAG)
-                        .commit();
+                openAboutAppScreen();
                 break;
             case R.id.nav_exit:
                 showExitDialog();
-                break;
-            case R.id.nav_home:
-                returnMainFragment();
                 break;
             default:
                 break;
@@ -102,27 +98,47 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onFilmItemClick(int id) {
+    private void openMainScreen() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.main_content, FilmDetailsFragment.newInstance(id), FilmDetailsFragment.TAG)
+                .replace(R.id.main_content, ListFilmsFragment.newInstance(true), ListFilmsFragment.TAG)
                 .commit();
-
-        showUpButton(true);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
+    private void openFavoriteFilmsScreen() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_content, ListFilmsFragment.newInstance(false), ListFilmsFragment.TAG)
+                .commit();
+    }
 
-        } else {
-            if (!returnMainFragment()) {
-                super.onBackPressed();
-            }
-        }
+    private void openAboutAppScreen() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_content, new AboutAppFragment(), AboutAppFragment.TAG)
+                .commit();
+    }
+
+    private void showExitDialog() {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        DialogInterface.OnClickListener lst =
+                (dialog, which) -> {
+                    switch (which) {
+                        case Dialog.BUTTON_POSITIVE:
+                            finish();
+                            break;
+                        case Dialog.BUTTON_NEGATIVE:
+                            break;
+                    }
+                    dialog.dismiss();
+                };
+
+        bld.setMessage(getString(R.string.exit_dialog_message))
+                .setTitle(getString(R.string.exit_dialog_title))
+                .setNegativeButton(getString(R.string.no), lst)
+                .setPositiveButton(getString(R.string.yes), lst)
+                .create()
+                .show();
     }
 
     private boolean returnMainFragment() {
@@ -134,6 +150,18 @@ public class MainActivity extends AppCompatActivity
             showUpButton(false);
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+
+        } else {
+            if (!returnMainFragment()) {
+                showExitDialog();
+            }
+        }
     }
 
     private void resolveUpButtonWithFragmentStack() {
@@ -157,28 +185,6 @@ public class MainActivity extends AppCompatActivity
             drawerToggle.setToolbarNavigationClickListener(null);
             toolBarNavigationListenerRegistered = false;
         }
-    }
-
-    private void showExitDialog() {
-        AlertDialog.Builder bld = new AlertDialog.Builder(this);
-        DialogInterface.OnClickListener lst =
-                (dialog, which) -> {
-                    switch (which) {
-                        case Dialog.BUTTON_POSITIVE:
-                            finish();
-                            break;
-                        case Dialog.BUTTON_NEGATIVE:
-                            break;
-                    }
-                    dialog.dismiss();
-                };
-
-        bld.setMessage(getString(R.string.exit_dialog_message))
-                .setTitle(getString(R.string.exit_dialog_title))
-                .setNegativeButton(getString(R.string.no), lst)
-                .setPositiveButton(getString(R.string.yes), lst)
-                .create()
-                .show();
     }
 
     @Override
@@ -206,5 +212,16 @@ public class MainActivity extends AppCompatActivity
         if (inviteIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(chooser);
         }
+    }
+
+    @Override
+    public void onFilmItemClick(int id) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.main_content, FilmDetailsFragment.newInstance(id), FilmDetailsFragment.TAG)
+                .commit();
+
+        showUpButton(true);
     }
 }

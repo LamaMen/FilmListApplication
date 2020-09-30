@@ -19,6 +19,8 @@
 
     <string name="drawer_menu_home">Главная</string>
 
+    <string name="drawer_menu_favorite">Избранные фильмы</string>
+
     <string name="drawer_menu_gallery">О приложении</string>
     <string name="about_app_description">\t\tЭто мое первое обучающее приложение для Android. На нем я отработал все новые возможности, которые изучал. Это простое приложение для просмотра списка фильмов.</string>
 
