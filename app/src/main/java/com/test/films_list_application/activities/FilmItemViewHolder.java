@@ -33,5 +33,6 @@ public class FilmItemViewHolder extends RecyclerView.ViewHolder {
         filmName.setText(film.getName());
         filmCover.setImageResource(film.getPhotoID());
         filmDescription.setText(film.getDescription());
+        likeButton.setChecked(film.isFavorite());
     }
 }

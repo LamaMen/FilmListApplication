@@ -5,12 +5,14 @@ public class Film {
     private final String name;
     private final String description;
     private final int photoID;
+    private boolean isFavorite;
 
     public Film(int id, String name, String description, int pathToImage) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.photoID = pathToImage;
+        this.isFavorite = false;
     }
 
     public int getId() {
@@ -27,5 +29,13 @@ public class Film {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }

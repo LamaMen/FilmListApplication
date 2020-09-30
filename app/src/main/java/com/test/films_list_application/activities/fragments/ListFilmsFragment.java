@@ -13,10 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.FilmItemsAdapter;
-import com.test.films_list_application.activities.OnButtonClickListener;
 import com.test.films_list_application.dao.Films;
 
-public class ListFilmsFragment extends Fragment implements OnButtonClickListener {
+public class ListFilmsFragment extends Fragment implements FilmItemsAdapter.OnItemFilmClickListener {
     public final static String TAG = ListFilmsFragment.class.toString();
 
     private OnFilmClickListener listener = null;
@@ -48,7 +47,7 @@ public class ListFilmsFragment extends Fragment implements OnButtonClickListener
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void onButtonPress(int id) {
+    public void onItemClick(int id) {
         if (listener != null) {
             listener.onFilmItemClick(id);
         }

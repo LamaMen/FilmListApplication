@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.fragments.ListFilmsFragment;
+import com.test.films_list_application.dao.Films;
 import com.test.films_list_application.dao.models.Film;
 
 import java.util.List;
@@ -16,12 +17,12 @@ import java.util.List;
 public class FilmItemsAdapter extends RecyclerView.Adapter<FilmItemViewHolder> {
     private final LayoutInflater inflater;
     private final List<Film> items;
-    private final OnButtonClickListener buttonClickListener;
+    private final OnItemFilmClickListener listener;
 
-    public FilmItemsAdapter(LayoutInflater inflater, List<Film> items, OnButtonClickListener buttonClickListener) {
+    public FilmItemsAdapter(LayoutInflater inflater, List<Film> items, OnItemFilmClickListener listener) {
         this.inflater = inflater;
         this.items = items;
-        this.buttonClickListener = buttonClickListener;
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,14 +35,27 @@ public class FilmItemsAdapter extends RecyclerView.Adapter<FilmItemViewHolder> {
     public void onBindViewHolder(@NonNull FilmItemViewHolder holder, int position) {
         Film currentFilm = items.get(position);
         holder.bind(currentFilm);
+
         holder.itemView.setOnClickListener(v -> {
-            buttonClickListener.onButtonPress(currentFilm.getId());
+            listener.onItemClick(currentFilm.getId());
             Log.d(ListFilmsFragment.TAG, "Button on item " + currentFilm.getId() + " pressed");
+        });
+
+        holder.likeButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                Films.getInstance().addFavoriteFilm(position);
+            } else {
+                Films.getInstance().removeFilmFromFavorite(position);
+            }
         });
     }
 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public interface OnItemFilmClickListener {
+        void onItemClick(int id);
     }
 }
