@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.fragments.ListFilmsFragment;
-import com.test.films_list_application.dao.Films;
 import com.test.films_list_application.dao.models.Film;
 
 import java.util.List;
@@ -18,6 +17,7 @@ import java.util.List;
 public class FavoriteFilmItemsAdapter extends BaseAdapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_NO_ITEMS = 0;
     private static final int VIEW_TYPE_REGULAR_ITEM = 1;
+
 
     public FavoriteFilmItemsAdapter(LayoutInflater inflater, List<Film> items, OnItemFilmClickListener listener) {
         super(inflater, items, listener);
@@ -45,8 +45,10 @@ public class FavoriteFilmItemsAdapter extends BaseAdapter<RecyclerView.ViewHolde
             });
 
             ((FilmItemViewHolder) holder).likeButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                Films.getInstance().removeFilmFromFavorite(currentFilm);
+                currentFilm.setFavorite(false);
+                items.remove(position);
                 notifyItemRemoved(position);
+                notifyItemRangeChanged(position, items.size());
             });
         }
     }
