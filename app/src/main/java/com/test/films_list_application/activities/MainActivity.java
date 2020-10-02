@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.test.films_list_application.R;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;
     private boolean toolBarNavigationListenerRegistered = false;
+    private String activeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity
         drawerToggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
@@ -101,8 +105,9 @@ public class MainActivity extends AppCompatActivity
     private void openMainScreen() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_content, ListFilmsFragment.newInstance(true), ListFilmsFragment.TAG)
+                .replace(R.id.main_content, ListFilmsFragment.newInstance(true), ListFilmsFragment.TAG_MAIN)
                 .commit();
+        activeFragment = ListFilmsFragment.TAG_MAIN;
     }
 
     private void openFavoriteFilmsScreen() {
@@ -110,6 +115,7 @@ public class MainActivity extends AppCompatActivity
                 .beginTransaction()
                 .replace(R.id.main_content, ListFilmsFragment.newInstance(false), ListFilmsFragment.TAG)
                 .commit();
+        activeFragment = ListFilmsFragment.TAG;
     }
 
     private void openAboutAppScreen() {
@@ -117,6 +123,7 @@ public class MainActivity extends AppCompatActivity
                 .beginTransaction()
                 .replace(R.id.main_content, new AboutAppFragment(), AboutAppFragment.TAG)
                 .commit();
+        activeFragment = AboutAppFragment.TAG;
     }
 
     private void showExitDialog() {
@@ -148,6 +155,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().popBackStack();
         if (backStack >= 1) {
             showUpButton(false);
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }
         return true;
     }
@@ -159,7 +167,11 @@ public class MainActivity extends AppCompatActivity
 
         } else {
             if (!returnMainFragment()) {
-                showExitDialog();
+                if (activeFragment.equals(ListFilmsFragment.TAG_MAIN)) {
+                    showExitDialog();
+                } else {
+                    openMainScreen();
+                }
             }
         }
     }
@@ -216,6 +228,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFilmItemClick(int id) {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)

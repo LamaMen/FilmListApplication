@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.R;
-import com.test.films_list_application.activities.Adapters.BaseAdapter;
-import com.test.films_list_application.activities.Adapters.FavoriteFilmItemsAdapter;
-import com.test.films_list_application.activities.Adapters.FilmItemsAdapter;
+import com.test.films_list_application.activities.adapters.BaseAdapter;
+import com.test.films_list_application.activities.adapters.FavoriteFilmItemsAdapter;
+import com.test.films_list_application.activities.adapters.FilmItemsAdapter;
 import com.test.films_list_application.dao.Films;
 
 public class ListFilmsFragment extends Fragment implements BaseAdapter.OnItemFilmClickListener {
+    public final static String TAG_MAIN = ListFilmsFragment.class.toString() + "MainScreen";
     public final static String TAG = ListFilmsFragment.class.toString();
     private static final String KEY_IS_MAIN_SCREEN = "IS_MAIN_SCREEN";
 
@@ -32,7 +33,6 @@ public class ListFilmsFragment extends Fragment implements BaseAdapter.OnItemFil
 
         return fragment;
     }
-
 
     @Nullable
     @Override

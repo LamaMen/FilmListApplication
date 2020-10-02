@@ -1,4 +1,4 @@
-package com.test.films_list_application.activities.Adapters;
+package com.test.films_list_application.activities.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;

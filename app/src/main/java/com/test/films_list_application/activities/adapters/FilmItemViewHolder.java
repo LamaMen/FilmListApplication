@@ -1,4 +1,4 @@
-package com.test.films_list_application.activities.Adapters;
+package com.test.films_list_application.activities.adapters;
 
 import android.view.View;
 import android.widget.CheckBox;
