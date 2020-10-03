@@ -8,7 +8,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
-    private final static String API_KEY = "e3b192c2546dd17a96029e06fec24c0a";
+    public final static String API_KEY = "e3b192c2546dd17a96029e06fec24c0a";
+    public final static String API_BASE_URL = "https://api.themoviedb.org/3/";
+    public final static String API_BASE_IMG_URL = "https://image.tmdb.org/t/p/w154";
     public FilmsService filmsService;
 
     private static App instance;
@@ -26,7 +28,7 @@ public class App extends Application {
 
     private void initRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
+                .baseUrl(API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

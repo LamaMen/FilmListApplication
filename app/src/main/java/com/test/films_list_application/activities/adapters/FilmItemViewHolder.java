@@ -8,11 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.test.films_list_application.App;
 import com.test.films_list_application.R;
 import com.test.films_list_application.dao.models.Film;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class FilmItemViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.film_name)
@@ -30,8 +34,15 @@ public class FilmItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Film film) {
+        String img = App.API_BASE_IMG_URL + film.getPhotoUrl();
+        Glide.with(itemView.getContext())
+                .load(img)
+                .centerCrop()
+                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(15, 0)))
+                .error(R.drawable.default_film_cover)
+                .into(filmCover);
+
         filmName.setText(film.getName());
-        filmCover.setImageResource(R.drawable.default_film_cover); // TODO: 03.10.2020 Добавить скачивание картинки из интернета
         filmDescription.setText(film.getDescription());
         likeButton.setChecked(film.isFavorite());
     }
