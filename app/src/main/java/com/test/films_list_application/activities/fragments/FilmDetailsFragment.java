@@ -55,7 +55,7 @@ public class FilmDetailsFragment extends Fragment {
             int filmId = getArguments().getInt(KEY_ID);
             Film currentFilm = MainActivity.mapFilms.get(filmId);
             filmName.setText(currentFilm.getName());
-            filmCover.setImageResource(currentFilm.getPhotoID());
+            filmCover.setImageResource(R.drawable.default_film_cover); // TODO: 03.10.2020 Добавить скачивание картинки из интернета
             filmDescription.setText(currentFilm.getDescription());
         } else {
             getActivity().onBackPressed();

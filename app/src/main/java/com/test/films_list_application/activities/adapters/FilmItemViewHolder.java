@@ -31,7 +31,7 @@ public class FilmItemViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(Film film) {
         filmName.setText(film.getName());
-        filmCover.setImageResource(film.getPhotoID());
+        filmCover.setImageResource(R.drawable.default_film_cover); // TODO: 03.10.2020 Добавить скачивание картинки из интернета
         filmDescription.setText(film.getDescription());
         likeButton.setChecked(film.isFavorite());
     }

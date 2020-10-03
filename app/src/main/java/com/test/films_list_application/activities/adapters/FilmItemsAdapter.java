@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.fragments.ListFilmsFragment;
-import com.test.films_list_application.dao.Films;
 import com.test.films_list_application.dao.models.Film;
 
 import java.util.List;
@@ -35,13 +34,7 @@ public class FilmItemsAdapter extends BaseAdapter<FilmItemViewHolder> {
             Log.d(ListFilmsFragment.TAG, "Button on item " + currentFilm.getId() + " pressed");
         });
 
-        holder.likeButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                Films.getInstance().addFavoriteFilm(currentFilm);
-            } else {
-                Films.getInstance().removeFilmFromFavorite(currentFilm);
-            }
-        });
+        // TODO: 03.10.2020  Вернуть обработку нажатия кнопки добавить в избранное
     }
 
     @Override

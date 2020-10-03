@@ -4,14 +4,14 @@ public class Film {
     private final int id;
     private final String name;
     private final String description;
-    private final int photoID;
+    private final String photoPhotoUrl;
     private boolean isFavorite;
 
-    public Film(int id, String name, String description, int pathToImage) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.photoID = pathToImage;
+    public Film(FilmJson json) {
+        this.id = json.id;
+        this.name = json.name;
+        this.description = json.description;
+        this.photoPhotoUrl = json.img;
         this.isFavorite = false;
     }
 
@@ -19,8 +19,8 @@ public class Film {
         return id;
     }
 
-    public int getPhotoID() {
-        return photoID;
+    public String getPhotoUrl() {
+        return photoPhotoUrl;
     }
 
     public String getName() {

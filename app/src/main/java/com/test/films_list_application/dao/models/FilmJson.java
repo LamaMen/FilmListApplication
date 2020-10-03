@@ -7,7 +7,7 @@ public class FilmJson {
     @SerializedName("title")
     public String name;
     @SerializedName("overview")
-    private String description;
+    public String description;
     @SerializedName("poster_path")
     public String img;
 }

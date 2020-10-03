@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,15 +17,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.fragments.AboutAppFragment;
-import com.test.films_list_application.activities.fragments.FilmDetailsFragment;
 import com.test.films_list_application.activities.fragments.ListFilmsFragment;
-import com.test.films_list_application.dao.Films;
 import com.test.films_list_application.dao.models.Film;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -41,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    @BindView(R.id.main_content_container)
+    View main;
 
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;
@@ -70,11 +71,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             openMainScreen();
         }
-
-        List<Film> films = Films.getInstance().getFilms();
-        for (Film film : films) {
-            mapFilms.put(film.getId(), film);
-        }
     }
 
     @Override
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity
                 openMainScreen();
                 break;
             case R.id.nav_favorite_films:
-                openFavoriteFilmsScreen();
+                // TODO: 03.10.2020 Вернуть открытие фрагмента с избранными фильмами
                 break;
             case R.id.nav_about_app:
                 openAboutAppScreen();
@@ -108,6 +104,9 @@ public class MainActivity extends AppCompatActivity
         activeFragment = ListFilmsFragment.TAG_MAIN;
     }
 
+    /**
+     * Открытие фрагмента с избраннными фильмами
+     */
     private void openFavoriteFilmsScreen() {
         getSupportFragmentManager()
                 .beginTransaction()
@@ -226,13 +225,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFilmItemClick(int id) {
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.main_content, FilmDetailsFragment.newInstance(id), FilmDetailsFragment.TAG)
-                .commit();
+//        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .addToBackStack(null)
+//                .replace(R.id.main_content, FilmDetailsFragment.newInstance(id), FilmDetailsFragment.TAG)
+//                .commit();
 
-        showUpButton(true);
+//        showUpButton(true);
+        Snackbar.make(main, String.valueOf(id), Snackbar.LENGTH_LONG).show();
     }
 }

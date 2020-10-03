@@ -44,12 +44,7 @@ public class FavoriteFilmItemsAdapter extends BaseAdapter<RecyclerView.ViewHolde
                 Log.d(ListFilmsFragment.TAG, "Button on item " + currentFilm.getId() + " pressed");
             });
 
-            ((FilmItemViewHolder) holder).likeButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                currentFilm.setFavorite(false);
-                items.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, items.size());
-            });
+            // TODO: 03.10.2020 Вернуть обработку нажатия кнопки добавить в избранное
         }
     }
 
