@@ -1,2 +1,8 @@
-# Films List Application
-Android app for movie search. It also allows you to recommend books to friends, leave comments and ratings.
+# Kinoteca
+Android приложение для просмотра списка фильмов. Это моё учебное приложение для ОС Android. На нем я пробую то, что только что изучил. 
+
+Проект написан на языке программирвания *Java*. Верстка в основном выполнена из базовых виджетов Android, а так же использованы *ConstraintLayout* и *RecyclerView*. В приложении всего одна активность и несколько фрагментов. 
+
+Для загрузки данных из сети используется библиотеки *Retrofit2* и *Glide* для изображений. 
+
+В качестве API для получения фильмов используется свободное API сайта TheMovieDB.
