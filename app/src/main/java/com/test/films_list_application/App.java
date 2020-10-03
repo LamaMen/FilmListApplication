@@ -2,6 +2,7 @@ package com.test.films_list_application;
 
 import android.app.Application;
 
+import com.test.films_list_application.dao.Cash;
 import com.test.films_list_application.dao.FilmsService;
 
 import retrofit2.Retrofit;
@@ -14,6 +15,7 @@ public class App extends Application {
     public final static String API_BASE_IMG_L_URL = "https://image.tmdb.org/t/p/w300";
 
     public FilmsService filmsService;
+    public Cash cash;
 
     private static App instance;
 
@@ -21,6 +23,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        cash = new Cash();
         initRetrofit();
     }
 

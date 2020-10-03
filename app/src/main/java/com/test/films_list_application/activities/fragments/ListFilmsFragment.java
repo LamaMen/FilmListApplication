@@ -17,6 +17,7 @@ import com.test.films_list_application.R;
 import com.test.films_list_application.activities.adapters.BaseAdapter;
 import com.test.films_list_application.activities.adapters.FavoriteFilmItemsAdapter;
 import com.test.films_list_application.activities.adapters.FilmItemsAdapter;
+import com.test.films_list_application.dao.Cash;
 import com.test.films_list_application.dao.models.Film;
 import com.test.films_list_application.dao.models.FilmJson;
 import com.test.films_list_application.dao.models.FilmListPage;
@@ -56,35 +57,17 @@ public class ListFilmsFragment extends Fragment implements BaseAdapter.OnItemFil
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
 
-            List<Film> films = new ArrayList<>();
+            Cash cash = App.getInstance().cash;
+            List<Film> films = cash.getCashedFilms();
+            if (cash.countCashedFilms() == 0) {
+                cash.getFilmsFromApi(recyclerView, 1);
+            }
 
             if (getArguments().getBoolean(KEY_IS_MAIN_SCREEN)) {
                 recyclerView.setAdapter(new FilmItemsAdapter(inflater, films, this));
             } else {
                 recyclerView.setAdapter(new FavoriteFilmItemsAdapter(inflater, new ArrayList<>(), this)); // TODO: 03.10.2020 Придумать как сохранять избранные фильмы
             }
-
-            App.getInstance().filmsService.getPopularFilms(1, "ru").enqueue(new Callback<FilmListPage>() {
-                @Override
-                public void onResponse(@NotNull Call<FilmListPage> call, @NotNull Response<FilmListPage> response) {
-                    if (response.isSuccessful()) {
-                        films.clear();
-                        FilmListPage page = response.body();
-                        Log.d("App", "Current page: " + page.currentPage);
-                        Log.d("App", "Total films: " + page.results.size());
-
-                        for (FilmJson json : page.results) {
-                            films.add(new Film(json));
-                        }
-                        recyclerView.getAdapter().notifyDataSetChanged();
-                    }
-                }
-
-                @Override
-                public void onFailure(@NotNull Call<FilmListPage> call, @NotNull Throwable t) {
-                    t.printStackTrace();
-                }
-            });
 
             return fragment;
         } else {
