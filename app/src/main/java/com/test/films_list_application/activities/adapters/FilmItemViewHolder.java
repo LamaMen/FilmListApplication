@@ -34,7 +34,7 @@ public class FilmItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Film film) {
-        String img = App.API_BASE_IMG_URL + film.getPhotoUrl();
+        String img = App.API_BASE_IMG_S_URL + film.getPhotoUrl();
         Glide.with(itemView.getContext())
                 .load(img)
                 .centerCrop()

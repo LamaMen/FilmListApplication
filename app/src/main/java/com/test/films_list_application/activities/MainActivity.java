@@ -17,14 +17,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.fragments.AboutAppFragment;
+import com.test.films_list_application.activities.fragments.FilmDetailsFragment;
 import com.test.films_list_application.activities.fragments.ListFilmsFragment;
-import com.test.films_list_application.dao.models.Film;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +28,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListFilmsFragment.OnFilmClickListener {
 
-    public final static Map<Integer, Film> mapFilms = new HashMap<>();
     private final static String TAG = MainActivity.class.toString();
     @BindView(R.id.main_toolbar)
     Toolbar toolbar;
@@ -225,14 +220,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFilmItemClick(int id) {
-//        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .addToBackStack(null)
-//                .replace(R.id.main_content, FilmDetailsFragment.newInstance(id), FilmDetailsFragment.TAG)
-//                .commit();
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.main_content, FilmDetailsFragment.newInstance(id), FilmDetailsFragment.TAG)
+                .commit();
 
-//        showUpButton(true);
-        Snackbar.make(main, String.valueOf(id), Snackbar.LENGTH_LONG).show();
+        showUpButton(true);
     }
 }

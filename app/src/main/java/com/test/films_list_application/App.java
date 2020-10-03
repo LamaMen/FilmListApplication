@@ -10,7 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class App extends Application {
     public final static String API_KEY = "e3b192c2546dd17a96029e06fec24c0a";
     public final static String API_BASE_URL = "https://api.themoviedb.org/3/";
-    public final static String API_BASE_IMG_URL = "https://image.tmdb.org/t/p/w154";
+    public final static String API_BASE_IMG_S_URL = "https://image.tmdb.org/t/p/w154";
+    public final static String API_BASE_IMG_L_URL = "https://image.tmdb.org/t/p/w300";
+
     public FilmsService filmsService;
 
     private static App instance;
