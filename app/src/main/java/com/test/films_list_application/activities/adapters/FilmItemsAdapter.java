@@ -3,9 +3,11 @@ package com.test.films_list_application.activities.adapters;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 
+import com.test.films_list_application.App;
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.fragments.ListFilmsFragment;
 import com.test.films_list_application.dao.models.Film;
@@ -34,7 +36,14 @@ public class FilmItemsAdapter extends BaseAdapter<FilmItemViewHolder> {
             Log.d(ListFilmsFragment.TAG, "Button on item " + currentFilm.getId() + " pressed");
         });
 
-        // TODO: 03.10.2020  Вернуть обработку нажатия кнопки добавить в избранное
+        holder.likeButton.setOnClickListener(view -> {
+            boolean isChecked = ((CheckBox) view).isChecked();
+            if (isChecked) {
+                App.getInstance().cash.addFavoriteFilm(currentFilm);
+            } else {
+                App.getInstance().cash.removeFilmFromFavorite(currentFilm);
+            }
+        });
     }
 
     @Override

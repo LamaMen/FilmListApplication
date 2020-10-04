@@ -1,7 +1,6 @@
 package com.test.films_list_application.activities.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +18,9 @@ import com.test.films_list_application.activities.adapters.FavoriteFilmItemsAdap
 import com.test.films_list_application.activities.adapters.FilmItemsAdapter;
 import com.test.films_list_application.dao.Cash;
 import com.test.films_list_application.dao.models.Film;
-import com.test.films_list_application.dao.models.FilmJson;
-import com.test.films_list_application.dao.models.FilmListPage;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ListFilmsFragment extends Fragment implements BaseAdapter.OnItemFilmClickListener {
     public final static String TAG_MAIN = ListFilmsFragment.class.toString() + "MainScreen";

@@ -20,6 +20,7 @@ import retrofit2.Response;
 
 public class Cash {
     private final List<Film> cashedFilms;
+    private final List<Film> favoriteFilms = new ArrayList<>();
 
     public Cash() {
         this.cashedFilms = new ArrayList<>();
@@ -54,5 +55,15 @@ public class Cash {
                 t.printStackTrace();
             }
         });
+    }
+
+    public void addFavoriteFilm(Film film) {
+        film.setFavorite(true);
+        favoriteFilms.add(film);
+    }
+
+    public void removeFilmFromFavorite(Film film) {
+        film.setFavorite(false);
+        favoriteFilms.remove(film);
     }
 }
