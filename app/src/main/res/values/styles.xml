@@ -10,11 +10,6 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay">
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
-        <item name="android:background">?colorPrimary</item>
-        <item name="android:elevation">4dp</item>
-    </style>
 
     <!--  Item Styling  -->
 
@@ -24,21 +19,10 @@
         <item name="cardElevation">4dp</item>
     </style>
 
-    <style name="ButtonStyle">
-        <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="android:textAppearance">@style/LightTextHeading</item>
-        <item name="cornerRadius">5dp</item>
-    </style>
-
     <!--  Text Styling  -->
 
     <style name="MainTextHeading" parent="@android:style/TextAppearance">
         <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="LightTextHeading" parent="MainTextHeading">
-        <item name="android:textColor">#fff</item>
     </style>
 
     <style name="BigMainText" parent="@android:style/TextAppearance">

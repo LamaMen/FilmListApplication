@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">Film List App</string>
 
-    <string name="details">Details</string>
     <string name="film_cover">Film cover</string>
-    <string name="comment_film">Comment film</string>
     <string name="invite_friend">Invite friend</string>
 
-    <string name="dogs_name_film">Reservoir dogs</string>
-    <string name="buy_me_name_film">Buy me</string>
-    <string name="last_jedi_name_film">Star Wars: The Last Jedi</string>
+    <string name="test_film_name">No Film</string>
 
-    <string name="test_string">This should have been the perfect crime. Having planned to rob a jewelry store, crime boss Joe Cabot gathered six experienced and completely unfamiliar criminals together. But from the very beginning, everything went wrong, and the usual robbery turned into a bloody carnage.</string>
+    <string name="test_string">Test film description</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

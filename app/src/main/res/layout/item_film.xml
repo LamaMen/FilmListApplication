@@ -21,7 +21,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/dogs" />
+            tools:src="@drawable/default_film_cover" />
 
         <TextView
             android:id="@+id/film_name"
@@ -34,7 +34,7 @@
             app:layout_constraintEnd_toStartOf="@id/like_button"
             app:layout_constraintStart_toEndOf="@id/film_cover"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/last_jedi_name_film" />
+            tools:text="@string/test_film_name" />
 
         <CheckBox
             android:id="@+id/like_button"

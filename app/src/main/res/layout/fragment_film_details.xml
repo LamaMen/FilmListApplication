@@ -31,7 +31,6 @@
                 android:layout_height="200dp"
                 android:layout_marginStart="@dimen/content_vertical_spacing"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/buy_me_name_film"
                 android:textAppearance="@style/BigMainText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/film_cover"

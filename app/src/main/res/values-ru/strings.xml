@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="details">Детали</string>
     <string name="film_cover">Обложка фильма</string>
-    <string name="comment_film">Коментировать фильм</string>
     <string name="invite_friend">Пригласить друга</string>
 
-    <string name="dogs_name_film">Бешенные псы</string>
-    <string name="buy_me_name_film">Купи меня</string>
-    <string name="last_jedi_name_film">Звездные войны: Последние Джедаи</string>
+    <string name="test_film_name">Имя фильмя для теста</string>
 
-    <string name="test_string">Это должно было стать идеальным преступлением. Задумав ограбить ювелирный магазин, криминальный босс Джо Кэбот собрал вместе шестерых опытных и совершенно незнакомых друг с другом преступников. Но с самого начала все пошло не так, и обычный грабеж превратился в кровавую бойню.</string>
+    <string name="test_string">Описание фильма для теста</string>
 
     <string name="navigation_drawer_open">Открыть панель навигации</string>
     <string name="navigation_drawer_close">Закрыть панель навигации</string>
