@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
                 openMainScreen();
                 break;
             case R.id.nav_favorite_films:
-                // TODO: 03.10.2020 Вернуть открытие фрагмента с избранными фильмами
+                openFavoriteFilmsScreen();
                 break;
             case R.id.nav_about_app:
                 openAboutAppScreen();

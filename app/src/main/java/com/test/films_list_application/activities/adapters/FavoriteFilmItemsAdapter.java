@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.test.films_list_application.App;
 import com.test.films_list_application.R;
 import com.test.films_list_application.activities.fragments.ListFilmsFragment;
 import com.test.films_list_application.dao.models.Film;
@@ -44,7 +45,11 @@ public class FavoriteFilmItemsAdapter extends BaseAdapter<RecyclerView.ViewHolde
                 Log.d(ListFilmsFragment.TAG, "Button on item " + currentFilm.getId() + " pressed");
             });
 
-            // TODO: 03.10.2020 Вернуть обработку нажатия кнопки добавить в избранное
+            ((FilmItemViewHolder) holder).likeButton.setOnClickListener(view -> {
+                App.getInstance().cash.removeFilmFromFavorite(currentFilm);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, items.size());
+            });
         }
     }
 

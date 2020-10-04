@@ -57,7 +57,7 @@ public class ListFilmsFragment extends Fragment implements BaseAdapter.OnItemFil
             if (getArguments().getBoolean(KEY_IS_MAIN_SCREEN)) {
                 recyclerView.setAdapter(new FilmItemsAdapter(inflater, films, this));
             } else {
-                recyclerView.setAdapter(new FavoriteFilmItemsAdapter(inflater, new ArrayList<>(), this)); // TODO: 03.10.2020 Придумать как сохранять избранные фильмы
+                recyclerView.setAdapter(new FavoriteFilmItemsAdapter(inflater, cash.getFavoriteFilms(), this));
             }
 
             return fragment;

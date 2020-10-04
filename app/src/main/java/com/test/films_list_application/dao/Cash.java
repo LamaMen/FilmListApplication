@@ -66,4 +66,8 @@ public class Cash {
         film.setFavorite(false);
         favoriteFilms.remove(film);
     }
+
+    public List<Film> getFavoriteFilms() {
+        return favoriteFilms;
+    }
 }
