@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Кинотека</string>
+
     <string name="film_cover">Обложка фильма</string>
     <string name="invite_friend">Пригласить друга</string>
 
@@ -29,7 +31,7 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
 
-    <string name="invite_friend_message">"Присоединяйся ко мне в приложении Film List App!"</string>
+    <string name="invite_friend_message">"Присоединяйся ко мне в приложении Кинотека!"</string>
     <string name="invite_friend_сhose_app">В каком приложении?</string>
 
     <string name="favorites_no_items">В избранном пока ничего нет. :(</string>

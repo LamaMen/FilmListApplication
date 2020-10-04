@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Film List App</string>
+    <string name="app_name">Kinoteca</string>
 
     <string name="film_cover">Film cover</string>
     <string name="invite_friend">Invite friend</string>
@@ -29,7 +29,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-    <string name="invite_friend_message">Join me on the Film List App!</string>
+    <string name="invite_friend_message">Join me on the Kinoteca!</string>
     <string name="invite_friend_сhose_app">Which application?</string>
 
     <string name="favorites_no_items">There is nothing in the favorites yet. :(</string>
