@@ -51,14 +51,24 @@ public class ListFilmsFragment extends Fragment implements BaseAdapter.OnItemFil
             Cash cash = App.getInstance().cash;
             List<Film> films = cash.getCashedFilms();
             if (cash.countCashedFilms() == 0) {
-                cash.getFilmsFromApi(recyclerView, 1);
+                cash.getFirstFilmPage(recyclerView);
             }
 
             if (getArguments().getBoolean(KEY_IS_MAIN_SCREEN)) {
                 recyclerView.setAdapter(new FilmItemsAdapter(inflater, films, this));
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        if (layoutManager.findLastCompletelyVisibleItemPosition() == films.size() - 3) {
+                            cash.getNextFilmPage(recyclerView);
+                        }
+                    }
+                });
             } else {
                 recyclerView.setAdapter(new FavoriteFilmItemsAdapter(inflater, cash.getFavoriteFilms(), this));
             }
+
+
 
             return fragment;
         } else {

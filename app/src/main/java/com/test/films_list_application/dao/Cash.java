@@ -21,6 +21,8 @@ import retrofit2.Response;
 public class Cash {
     private final List<Film> cashedFilms;
     private final List<Film> favoriteFilms = new ArrayList<>();
+    private int currentPage;
+    private int totalPages = -1;
 
     public Cash() {
         this.cashedFilms = new ArrayList<>();
@@ -34,27 +36,42 @@ public class Cash {
         return cashedFilms;
     }
 
-    public void getFilmsFromApi(RecyclerView recyclerView, int page) {
-        App.getInstance().filmsService.getPopularFilms(page, "ru").enqueue(new Callback<FilmListPage>() {
-            @Override
-            public void onResponse(@NotNull Call<FilmListPage> call, @NotNull Response<FilmListPage> response) {
-                if (response.isSuccessful()) {
-                    FilmListPage page = response.body();
-                    Log.d("App", "Current page: " + page.currentPage);
-                    Log.d("App", "Total films: " + page.results.size());
+    private void getFilmsFromApi(RecyclerView recyclerView, int page) {
+        if ((totalPages == -1 && page == 1) || page <= totalPages) {
+            App.getInstance().filmsService.getPopularFilms(page, "ru").enqueue(new Callback<FilmListPage>() {
+                @Override
+                public void onResponse(@NotNull Call<FilmListPage> call, @NotNull Response<FilmListPage> response) {
+                    if (response.isSuccessful()) {
+                        FilmListPage returnedPage = response.body();
+                        currentPage = returnedPage.currentPage;
+                        if (page == 1) {
+                            totalPages = returnedPage.totalPages;
+                        }
+                        Log.d("App", "Current page: " + returnedPage.currentPage);
+                        Log.d("App", "Total films: " + returnedPage.results.size());
 
-                    for (FilmJson json : page.results) {
-                        cashedFilms.add(new Film(json));
+                        int oldSize = cashedFilms.size();
+                        for (FilmJson json : returnedPage.results) {
+                            cashedFilms.add(new Film(json));
+                        }
+                        recyclerView.getAdapter().notifyItemRangeInserted(oldSize, cashedFilms.size());
                     }
-                    recyclerView.getAdapter().notifyDataSetChanged();
                 }
-            }
 
-            @Override
-            public void onFailure(@NotNull Call<FilmListPage> call, @NotNull Throwable t) {
-                t.printStackTrace();
-            }
-        });
+                @Override
+                public void onFailure(@NotNull Call<FilmListPage> call, @NotNull Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+        }
+    }
+
+    public void getFirstFilmPage(RecyclerView recyclerView) {
+        getFilmsFromApi(recyclerView, 1);
+    }
+
+    public void getNextFilmPage(RecyclerView recyclerView) {
+        getFilmsFromApi(recyclerView, ++currentPage);
     }
 
     public void addFavoriteFilm(Film film) {
