@@ -1,3 +1,36 @@
 <resources>
-    <string name="app_name">Film List Application</string>
+    <string name="app_name" translatable="false">Film List App</string>
+
+    <string name="film_cover">Film cover</string>
+    <string name="invite_friend">Invite friend</string>
+
+    <string name="test_film_name">No Film</string>
+
+    <string name="test_string">Test film description</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Developer: Ilia Rodionov</string>
+    <string name="nav_header_subtitle">https://github.com/LamaMen</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="drawer_menu_home">Home</string>
+
+    <string name="drawer_menu_favorite">Favorite films</string>
+
+    <string name="drawer_menu_gallery">About Application</string>
+    <string name="about_app_description">\t\tThis is my first Android learning app. On it, I worked out all the new possibilities that I studied. This is a simple application to view your movie list.</string>
+
+    <string name="drawer_menu_exit">Exit</string>
+
+    <string name="exit_dialog_message">Are you sure you want to exit the application?</string>
+    <string name="exit_dialog_title">Exit the application</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="invite_friend_message">Join me on the Film List App!</string>
+    <string name="invite_friend_сhose_app">Which application?</string>
+
+    <string name="favorites_no_items">There is nothing in the favorites yet. :(</string>
 </resources>

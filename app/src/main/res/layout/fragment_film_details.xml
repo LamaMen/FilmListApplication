@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/activity_horizontal_spacing"
+            android:paddingVertical="@dimen/activity_vertical_spacing">
+
+            <ImageView
+                android:id="@+id/film_cover"
+                android:layout_width="120dp"
+                android:layout_height="200dp"
+                android:contentDescription="@string/film_cover"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/film_name"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="@dimen/content_vertical_spacing"
+                android:gravity="center_vertical|center_horizontal"
+                android:textAppearance="@style/BigMainText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/film_cover"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_default="spread" />
+
+            <TextView
+                android:id="@+id/film_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_vertical_spacing"
+                android:text="@string/test_string"
+                android:textAppearance="@style/MainTextHeading"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/film_cover"
+                app:layout_constraintWidth_default="spread" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        tools:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+</FrameLayout>
