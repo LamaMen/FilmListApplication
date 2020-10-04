@@ -1,6 +1,5 @@
 package com.test.films_list_application.activities.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.films_list_application.App;
 import com.test.films_list_application.R;
-import com.test.films_list_application.activities.fragments.ListFilmsFragment;
 import com.test.films_list_application.dao.models.Film;
 
 import java.util.List;
@@ -30,7 +28,7 @@ public class FavoriteFilmItemsAdapter extends BaseAdapter<RecyclerView.ViewHolde
         if (viewType == VIEW_TYPE_NO_ITEMS) {
             return new NoItemsViewHolder(inflater.inflate(R.layout.item_no_films, parent, false));
         } else {
-            return new FilmItemViewHolder(inflater.inflate(R.layout.item_film, parent, false));
+            return new FilmItemViewHolder(inflater.inflate(R.layout.item_film, parent, false), listener);
         }
     }
 
@@ -39,11 +37,6 @@ public class FavoriteFilmItemsAdapter extends BaseAdapter<RecyclerView.ViewHolde
         if (holder instanceof FilmItemViewHolder) {
             Film currentFilm = items.get(position);
             ((FilmItemViewHolder) holder).bind(currentFilm);
-
-            holder.itemView.setOnClickListener(v -> {
-                listener.onItemClick(currentFilm.getId());
-                Log.d(ListFilmsFragment.TAG, "Button on item " + currentFilm.getId() + " pressed");
-            });
 
             ((FilmItemViewHolder) holder).likeButton.setOnClickListener(view -> {
                 App.getInstance().cash.removeFilmFromFavorite(currentFilm);

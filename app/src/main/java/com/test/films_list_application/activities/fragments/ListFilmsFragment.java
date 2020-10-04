@@ -19,7 +19,6 @@ import com.test.films_list_application.activities.adapters.FilmItemsAdapter;
 import com.test.films_list_application.dao.Cash;
 import com.test.films_list_application.dao.models.Film;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListFilmsFragment extends Fragment implements BaseAdapter.OnItemFilmClickListener {
@@ -67,7 +66,6 @@ public class ListFilmsFragment extends Fragment implements BaseAdapter.OnItemFil
             } else {
                 recyclerView.setAdapter(new FavoriteFilmItemsAdapter(inflater, cash.getFavoriteFilms(), this));
             }
-
 
 
             return fragment;

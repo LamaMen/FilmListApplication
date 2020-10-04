@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class FilmItemViewHolder extends RecyclerView.ViewHolder {
+    private final BaseAdapter.OnItemFilmClickListener listener;
     @BindView(R.id.film_name)
     TextView filmName;
     @BindView(R.id.film_description)
@@ -28,8 +29,9 @@ public class FilmItemViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.like_button)
     CheckBox likeButton;
 
-    public FilmItemViewHolder(@NonNull View itemView) {
+    public FilmItemViewHolder(@NonNull View itemView, BaseAdapter.OnItemFilmClickListener listener) {
         super(itemView);
+        this.listener = listener;
         ButterKnife.bind(this, itemView);
     }
 
@@ -45,5 +47,6 @@ public class FilmItemViewHolder extends RecyclerView.ViewHolder {
         filmName.setText(film.getName());
         filmDescription.setText(film.getDescription());
         likeButton.setChecked(film.isFavorite());
+        itemView.setOnClickListener(v -> listener.onItemClick(film.getId()));
     }
 }
